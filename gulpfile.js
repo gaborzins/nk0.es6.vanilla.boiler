@@ -66,18 +66,25 @@ var path = {
 gulp.task('serve', function(){
 	
   bsync.init({
-		server: "./bin"
+		server: "./bin",
+    reloadDelay: 1000
   });
 
-  gulp.watch([path.JS, path.SCSS], function(event){
-  	seq('development-seq')(function(err){
-  		if(err) console.log(err);
-  	});
+  seq('development-seq')(function(err){
+      if(err){console.log(err)};
+      bsync.reload();
+    });
+
+  gulp.watch(path.JS, function(event){
+    seq('build-development', 'replaceDevelopHtml')(function(){
+      bsync.reload();
+    });
   });
 
   gulp.watch(path.HTML).on('change', function(){
-    replaceDevelopHtml();
-    bsync.reload();
+    seq('replaceDevelopHtml')(function(){
+      bsync.reload();
+    });
   });
 });
 
@@ -131,14 +138,12 @@ function replaceProductionHtml(){
   .pipe(gulp.dest('dist/'));
 };
 
-function replaceDevelopHtml(){
+gulp.task('replaceDevelopHtml', function(){
   var replacement = {
-    'third-party': [/*
-      './src/lib/jquery.js', 
-      './src/lib/tweenjs-0.6.2.combined.js', 
-      './src/lib/easeljs-0.8.2.combined.js',
-      './src/lib/react.js',
-      './src/lib/Flux.js'*/
+    'third-party': [
+      /*
+        
+      */
     ],
     'build': [
       './' + path.DEST_SRC + path.DEST_JS + path.OUT
@@ -149,9 +154,10 @@ function replaceDevelopHtml(){
     htmlreplace(replacement)
   )
   .pipe(gulp.dest(path.DEST_BIN));
-};
+});
 
 gulp.task('build-development', function(){
+  console.info("====> ", path.DEST_BIN + path.DEST_SRC + path.DEST_JS);
   glob(path.JS, function(err, files) {
     var tasks = files.map(function(entry) {
       return browserify({ 
@@ -161,6 +167,7 @@ gulp.task('build-development', function(){
       .transform('babelify', {presets: ['es2015']})
       .bundle()
       .pipe(source(path.OUT))
+     // .pipe(streamify(uglify()))
       .pipe(gulp.dest(path.DEST_BIN + path.DEST_SRC + path.DEST_JS));
     });
   });
@@ -186,7 +193,7 @@ gulp.task('build-production', function(){
   RUN FOR DEVELOPMENT
 */
 gulp.task('development-seq', function(cb){
-	seq('clean-development', 'build-development', 'sass-development', replaceDevelopHtml)(cb);
+	seq('clean-development', 'build-development', 'sass-development', 'replaceDevelopHtml')(cb);
 });
 gulp.task('development', seq('development-seq'));
 gulp.task('default', ['serve']);

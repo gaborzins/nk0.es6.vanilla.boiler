@@ -4,10 +4,172 @@
 
  */
 @charset "utf-8";
+@import "lib/partials/reset";
 
 // Your partials
-//@import "app/layout";
+@import "app/layout";
+
+// MacDonald's Color Palette
+$mac-red: #dd1022;
+$mac-yellow: #ffc300;
 
 h1{
-	color:#ff0000;
+	color:#00ff00;
 }
+
+header{
+	position:fixed;
+	margin:0 auto;
+	display:block;
+	width:100%;
+	z-index:999;
+}
+.main-title{
+	padding:10px;
+	margin: 0 auto;
+	display:block;
+	text-align:center;
+	left:0px;
+	color:$mac-yellow;
+	background-color:$mac-red;
+	width:20%;
+}
+
+.content{
+	height:100%;
+}
+.lanes-container{
+	width:100%;
+	height:100%;
+}
+.lane{
+	display:inline-block;
+	width:50%;
+	height:100%;
+	margin:0px;
+	padding:0px;
+	border:1px solid #ff0000;
+
+	.lane-title{
+		margin: 60px 0px auto;
+	    display: block;
+	    width: inherit;
+	    color: $mac-yellow;
+	    position: absolute;
+	    text-align: center;
+	    z-index:1000;
+	    text-decoration:underline;
+	}
+
+	.video-feed{
+
+		height:40%;
+		display:block;
+		border:1px solid #333;
+		position:relative;
+		overflow: hidden;
+
+		.video-feed-img{
+			vertical-align: middle;
+		    margin: 0 auto;
+		    top: 50%;
+		    display: block;
+		    user-select: none;
+		    cursor: zoom-in;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		    position: absolute;
+		    height: 100%;
+		}
+	}
+
+	.video-feed.video-feed-1{
+		// something here
+	}
+
+	.video-feed.video-feed-2{
+		// something here
+	}
+
+	.suggestive{
+		// background-color:#eee;
+		width:100%;
+		height:100%;
+
+		.trigger-container{
+
+		}
+
+		.suggestion-container{
+
+			width:100%;
+			display: block;
+    		height: 100%;
+    		padding:12%;
+
+			.suggestion-viz-container{
+				position: relative;
+			    display: inline-block;
+			    width: 40%;
+			    float:left;
+			    img{
+			    	width:100%;
+			    }
+			    h1{
+			    	font-size: 600%;
+			    	position:absolute;
+			    	right: -30px;
+    				bottom: 0px;
+			    }
+			}
+
+			.suggestion-caption{
+				position: relative;
+			    display: inline-block;
+			    width: 60%;
+			    text-align:center;
+			    text-transform: capitalize;
+			    padding:5px;
+
+			}
+		}
+
+
+	}
+}
+
+.lane.lane-1{
+	float:left;
+}
+
+
+footer{
+	bottom:0px;
+	height:70px;
+	position:fixed;
+	display: block;
+    width: 100%;
+}
+#main-nav{
+
+
+
+	background-color:$mac-red;
+	color:$mac-yellow!important;
+	height:100%;
+	margin: 0 auto;
+	width:50%;
+	padding-top:20px;
+	text-align:center;
+
+	a:visited,
+	a:active{
+		color:$mac-yellow!important;
+	}
+}
+
+.hidden{
+	display:none!important;
+}
+
+

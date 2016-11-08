@@ -1,3 +1,3 @@
 export function add(a, b){
-	console.info("AAdding a: ", a, " + ", " b: ", b, " = ", a + b);
+	console.info("Adding a: ", a, " + ", " b: ", b, " = ", a + b, " !!!!!!!!!");
 }
