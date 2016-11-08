@@ -1,0 +1,8 @@
+/public/vendor/
+/node_modules/
+bin/
+dist/
+./bin/
+./dist/
+/bin/**/*
+/dist/**/*

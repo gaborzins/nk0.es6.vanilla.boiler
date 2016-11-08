@@ -1,0 +1,18 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "globals": {
+    "COD": true,
+    "io": true
+  },
+  "rules":{
+    "no-console": ["error", {
+      "allow": ["warn", "error", "log", "info"]
+    }],
+    "no-undef": "off",
+    "semi": [2, "always"],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single", {"allowTemplateLiterals": true}]
+  }
+}
